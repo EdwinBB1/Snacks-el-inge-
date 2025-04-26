@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snaks el Inge</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap">
+  <style>
+    :root {
+      --bg-color: #fff;
+      --text-color: #111;
+      --card-bg: #f4f4f4;
+      --primary: #ff5722;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #111;
+      --text-color: #fff;
+      --card-bg: #1e1e1e;
+      --primary: #ff9800;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--primary);
+      padding: 1rem 2rem;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .logo-img {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 60px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: var(--card-bg);
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .menu-item {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s;
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(255,87,34, 0.1); }
+      50% { box-shadow: 0 0 15px rgba(255,87,34, 0.4); }
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .menu-item img {
+      max-width: 100%;
+      border-radius: 8px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .menu-item h3 {
+      margin: 1rem 0 0.5rem;
+    }
+
+    .menu-item p {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .menu-item button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: var(--primary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: var(--card-bg);
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .mascota3d {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      width: 100px;
+      height: 100px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .toggle-theme {
+      cursor: pointer;
+      background: none;
+      border: 2px solid var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    #cart {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--card-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      max-width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    #cart ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #cart li {
+      margin: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      background: none;
+      color: red;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #checkout-btn {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background-color: var(--primary);
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Sustituye la ruta de abajo con tu logotipo -->
+    <img src="Images/LogoRest.png" alt="Mi Logotipo" class="logo-img">
+    <h1>Snacks El Inge</h1>
+    <p>¡Ingenio en cada bocado!</p>
+  </header>
+
+  <nav>
+    <span>Menú</span>
+    <div>
+      <button class="toggle-theme" onclick="toggleTheme()">Modo Claro/Oscuro</button>
+      <button class="toggle-theme" onclick="toggleCart()">Carrito 🛒 (<span id="cart-count">0</span>)</button>
+    </div>
+  </nav>
+
+  <section class="menu">
+        <div class="menu-item">
+          <img src="https://media.gq.com.mx/photos/649391b89ec62ce6c5b091a5/16:9/w_2560%2Cc_limit/mejores-hamburguesas.jpg" alt="Hamburguesa Clásica">
+          <h3>Hamburguesa Clásica</h3>
+          <p>$65.00</p>
+          <button onclick="addToCart('Hamburguesa Clásica', 5.99)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://www.bancodealimentoschicago.org/wp-content/uploads/2022/04/Baked-Fries.jpg" alt="Papas Fritas">
+          <h3>Papas Fritas</h3>
+          <p>$30.00</p>
+          <button onclick="addToCart('Papas Fritas', 2.49)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://media.istockphoto.com/id/694198404/es/foto/hamburguesas-y-papas-fritas.jpg?s=612x612&w=0&k=20&c=6kaMnrlHEYY40zlU3G2zRNYXLjhs5dK5I_qFP9d7QCQ=" alt="Combo Familiar">
+          <h3>Combo Familiar</h3>
+          <p>$85.00</p>
+          <button onclick="addToCart('Combo Familiar', 12.99)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://img.freepik.com/fotos-premium/vierta-cubitos-hielo-te-frio-refresco-cola-o-burbujas-aire-cafe-taza-vidrio-cuando-bebida-salpica-ia-generativa_28914-7695.jpg" alt="Refresco Grande">
+          <h3>Refresco Grande</h3>
+          <p>$25.00</p>
+          <button onclick="addToCart('Refresco Grande', 1.99)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://editorialtelevisa.brightspotcdn.com/bd/89/5d71eca048a4871912ec6cefcfcc/tacos-al-pastor.jpg" alt="Tacos Al Pastor">
+          <h3>Tacos Al Pastor</h3>
+          <p>$20.00</p>
+          <button onclick="addToCart('Tacos Al Pastor', 3.99)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://mxc.com.mx/wp-content/uploads/2017/06/santa-fee.jpg" alt="Hot Dog Clásico">
+          <h3>Hot Dog Clásico</h3>
+          <p>$35.00</p>
+          <button onclick="addToCart('Hot Dog Clásico', 2.99)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://7diasdesabor.com/wp-content/uploads/2023/08/WEB-SIZE-7DDS.jpg" alt="Nachos con Queso">
+          <h3>Nachos con Queso</h3>
+          <p>$45.00</p>
+          <button onclick="addToCart('Nachos con Queso', 4.49)">Agregar al carrito</button>
+        </div>
+        <div class="menu-item">
+          <img src="https://www.novachef.es/images/recetas/batido-fresa-platano/batido-fresa-platano.jpg" alt="Batido de Fresa">
+          <h3>Batido de Fresa</h3>
+          <p>$40</p>
+          <button onclick="addToCart('Batido de Fresa', 2.75)">Agregar al carrito</button>
+        </div>    
+  </section>
+
+  <div id="cart">
+    <h3>Tu Carrito</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total:</strong> $<span id="cart-total">0.00</span></p>
+    <button id="checkout-btn" onclick="checkout()">Realizar Pedido</button>
+  </div>
+
+  <footer>
+    <p>Desarrollado por: Edwin_BB</p>
+    <img src="Images/Macota.png" alt="Mascota 3D" class="mascota3d" />
+  </footer>
+
+  <script>
+    let cart = [];
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    }
+
+    function toggleCart() {
+      const cartDiv = document.getElementById("cart");
+      cartDiv.style.display = cartDiv.style.display === "none" || !cartDiv.style.display ? "block" : "none";
+    }
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      const cartTotal = document.getElementById("cart-total");
+      const cartCount = document.getElementById("cart-count");
+
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${item.name} - $${item.price.toFixed(2)} <button class='remove-btn' onclick='removeFromCart(${index})'>✖</button>`;
+        cartItems.appendChild(li);
+        total += item.price;
+      });
+
+      cartTotal.textContent = total.toFixed(2);
+      cartCount.textContent = cart.length;
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+      alert("¡Gracias por tu pedido! Tu comida está en camino.");
+      cart = [];
+      renderCart();
+      toggleCart();
+    }
+
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+</body>
+</html>
